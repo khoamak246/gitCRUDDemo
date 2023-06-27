@@ -65,6 +65,4 @@ public class ProductController {
         productService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }
