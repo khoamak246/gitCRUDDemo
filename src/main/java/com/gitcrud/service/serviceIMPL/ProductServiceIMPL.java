@@ -47,4 +47,9 @@ public class ProductServiceIMPL implements IProductService {
     public Product update(Product product) {
         return null;
     }
+
+    @Override
+    public Iterable<Product> findProductByName(String name) {
+        return productRepository.searchAllByName(name);
+    }
 }
