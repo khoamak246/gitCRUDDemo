@@ -56,4 +56,11 @@ public class ProductController {
     }
 >>>>>>> 5471135b704ecb955e1ab11d70be0a5d38573ca9
 
+    @GetMapping
+    private ResponseEntity<Product>findProductById(@RequestParam("id")Long id){
+        if (productService.findById(id)!=null){
+            return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

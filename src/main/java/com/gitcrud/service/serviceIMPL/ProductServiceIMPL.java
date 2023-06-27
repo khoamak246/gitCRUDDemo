@@ -21,6 +21,9 @@ public class ProductServiceIMPL implements IProductService {
 
     @Override
     public Product findById(Long id) {
+        if (productRepository.findById(id).isPresent()) {
+            return productRepository.findById(id).get();
+        }
         return null;
     }
 
