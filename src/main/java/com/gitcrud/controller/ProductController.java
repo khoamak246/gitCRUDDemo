@@ -40,8 +40,8 @@ public class ProductController {
         return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
     }
 
-    @GetMapping
-    private ResponseEntity<Product>findProductById(@RequestParam("id")Long id){
+    @GetMapping("/findById/{id}")
+    private ResponseEntity<Product>findProductById(@PathVariable("id")Long id){
         if (productService.findById(id)!=null){
             return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
         }
