@@ -16,7 +16,7 @@ public class ProductServiceIMPL implements IProductService {
 
     @Override
     public List<Product> findAll() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
