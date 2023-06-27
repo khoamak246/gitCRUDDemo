@@ -12,4 +12,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface IProductRepository extends JpaRepository<Product, Long> {
     @Query("Select p from Product  as p where p.name like concat('%',upper(?1) ,'%')")
     Iterable<Product> searchAllByName(@Param("name") String name);
+
 }
