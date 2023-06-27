@@ -1,6 +1,14 @@
 package com.gitcrud.service.design;
 
+
+import org.springframework.stereotype.Service;
+
 import java.util.List;
+
+
+
+import java.util.List;
+
 
 public interface IGeneric <T>{
 
