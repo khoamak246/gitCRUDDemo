@@ -15,6 +15,7 @@ import java.util.List;
 public class ProductServiceIMPL implements IProductService {
 
     private final IProductRepository productRepository;
+
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
@@ -35,7 +36,7 @@ public class ProductServiceIMPL implements IProductService {
 
     @Override
     public void deleteById(Long id) {
-
+        productRepository.deleteById(id);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ProductServiceIMPL implements IProductService {
 
     @Override
     public Product update(Product product) {
-        return productRepository.save(product);;
+        return productRepository.save(product);
     }
 
     @Override

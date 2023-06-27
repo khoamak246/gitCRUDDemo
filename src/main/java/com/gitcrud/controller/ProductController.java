@@ -2,18 +2,10 @@ package com.gitcrud.controller;
 
 import com.gitcrud.model.Product;
 import com.gitcrud.service.IProductService;
-import com.gitcrud.service.serviceIMPL.ProductServiceIMPL;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -33,17 +25,18 @@ public class ProductController {
     public List<Product> findAllProduct(){
         return productService.findAll();
     }
-    @Autowired
-    private ProductServiceIMPL productServiceIMPL;
+
     @GetMapping("/findByName")
     public ResponseEntity<List<Product>> searchByName(@RequestParam("name") String name) {
-        List<Product> list = (List<Product>) productServiceIMPL.findProductByName(name);
+        List<Product> list = (List<Product>) productService.findProductByName(name);
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
+
+
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<Product> editProduct(@PathVariable Long id, @RequestBody Product product) {
@@ -62,4 +55,16 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id){
+        Product product = productService.findById(id);
+        if (product == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        productService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
