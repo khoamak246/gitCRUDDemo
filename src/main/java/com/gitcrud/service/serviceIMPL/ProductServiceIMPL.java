@@ -45,7 +45,7 @@ public class ProductServiceIMPL implements IProductService {
 
     @Override
     public Product update(Product product) {
-        return null;
+        return productRepository.save(product);;
     }
 
     @Override
