@@ -1,12 +1,26 @@
 package com.gitcrud.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.gitcrud.model.Product;
+import com.gitcrud.service.IProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/product")
+@RequiredArgsConstructor
 public class ProductController {
+    private final IProductService productService;
 
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Product> editProduct(@PathVariable Long id, @RequestBody Product product) {
+        Product pro = productService.findById(id);
+        if (pro == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        product.setId(pro.getId());
+        return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
+    }
 
 }
