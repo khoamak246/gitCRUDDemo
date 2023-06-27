@@ -4,6 +4,8 @@ import com.gitcrud.model.Product;
 import com.gitcrud.repository.IProductRepository;
 import com.gitcrud.service.IProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,12 +31,12 @@ public class ProductServiceIMPL implements IProductService {
 
     @Override
     public Product save(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        productRepository.deleteById(id);
     }
 
     @Override
@@ -46,8 +48,9 @@ public class ProductServiceIMPL implements IProductService {
     public Product update(Product product) {
         return productRepository.save(product);
     }
-<<<<<<< HEAD
+
+    @Override
+    public Iterable<Product> findProductByName(String name) {
+        return productRepository.searchAllByName(name);
+    }
 }
-=======
-}
->>>>>>> 5471135b704ecb955e1ab11d70be0a5d38573ca9
